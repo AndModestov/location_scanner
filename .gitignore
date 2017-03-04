@@ -1,0 +1,32 @@
+
+# Игнорирование конфига bundler
+/.bundle
+
+# Игнорирование дефолтной базы данных SQLite.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Игнорирование всех логов и временных файлов.
+/log
+/tmp
+
+# Игнорирование прочих ненужных файлов.
+database.yml
+private_pub.yml
+doc/
+*.swp
+*~
+.project
+.DS_Store
+.idea
+.secret
+
+# Ignore uploaded files
+/public/system
+/public/tmp
+/public/uploads
+/public/spec
+
+dump.rdb
+config/*.sphinx.conf
+db/sphinx
