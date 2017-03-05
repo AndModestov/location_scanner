@@ -1,0 +1,16 @@
+table.table
+  thead
+    tr
+      th id
+      th latitude
+      th longitude
+      th destroy
+      
+  tbody
+    tr
+      td = @point.id
+      td = @point.latitude
+      td = @point.longitude
+      td = link_to 'Delete point', point_path(@point), class: 'btn btn-primary',
+                                                      method: 'delete', data: {confirm: "Sure?"}
+                                                      

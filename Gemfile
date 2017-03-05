@@ -18,6 +18,8 @@ gem 'active_model_serializers'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'redis-rails'
+gem "private_pub"
+gem "thin"
 
 gem 'sdoc', group: :doc
 
@@ -42,6 +44,5 @@ end
 
 group :test do
   gem 'shoulda-matchers'
-  gem 'capybara-email'
   gem 'json_spec'
 end

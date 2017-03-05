@@ -1,0 +1,30 @@
+h3 Points list:
+table.table
+  thead
+    tr
+      th id
+      th latitude
+      th longitude
+      th destroy
+  - if @points    
+    tbody.points
+      - @points.each do |point|
+        tr id="point_#{point.id}"
+          td = link_to point.id, point_path(point)
+          td = point.latitude
+          td = point.longitude
+          td = link_to 'Delete point', point_path(point), remote: true,
+                                                          class: 'btn btn-primary destroy_point',
+                                                          method: 'delete', data: {confirm: "Sure?"}
+
+br
+.panel.panel-info.create_form
+  .panel-heading
+    .panel-title Create new point: 
+  .panel-body.row                                                         
+    = form_for @point, remote: true do |f|
+      p = f.text_field :latitude, placeholder: "latitude", id: 'create_form'
+      p = f.text_field :longitude, placeholder: "longitude", id: 'create_form'
+      p = f.submit 'Create', class: 'btn btn-large btn-primary'
+
+= subscribe_to "/points"
