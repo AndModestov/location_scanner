@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'Show point view' do
+feature 'Show point' do
   given!(:point){ create(:point) }
 
-  scenario 'Visitor tryes to watch point' do
+  scenario 'Visitor watches point' do
     visit points_path
     click_on point.id
 

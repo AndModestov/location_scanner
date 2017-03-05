@@ -1,8 +1,8 @@
 class PointsController < ApplicationController
-  before_action :find_point, only: [:show, :destroy]
+  before_action :find_point, only: [:show, :destroy, :find_nearest_points]
   before_action :build_new_point, only: :index
 
-  respond_to :js, only: [:create, :destroy]
+  respond_to :js, only: [:create, :destroy, :find_nearest_points]
 
   def index
     respond_with(@points = Point.all)
@@ -26,6 +26,12 @@ class PointsController < ApplicationController
   def destroy
     @point.destroy
     render json: { point: @point.id }
+  end
+
+  def find_nearest_points
+    radius = params[:radius].to_f
+    @point.get_nearest_points radius
+    render nothing: true
   end
 
   private

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Visitor can create point' do
+feature 'Create point' do
 
   scenario 'Visitor creates point', js: true do
     visit root_path

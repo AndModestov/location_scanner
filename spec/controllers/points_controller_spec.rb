@@ -23,7 +23,7 @@ RSpec.describe PointsController, type: :controller do
     let(:point) { create(:point) }
     before { get :show, id: point }
 
-    it 'assigns the requested question to @question' do
+    it 'assigns the requested point to @point' do
       expect(assigns(:point)).to eq point
     end
 
@@ -72,6 +72,15 @@ RSpec.describe PointsController, type: :controller do
     it 'renders point id' do
       delete :destroy, id: point, format: :js
       expect(response.body).to be_json_eql(point.id).at_path("point")
+    end
+  end
+
+  describe 'GET #find_nearest_points' do
+    let!(:point){ create(:point) }
+    before { get :find_nearest_points, id: point, radius: '300', format: :js }
+
+    it 'assigns the requested point to @point' do
+      expect(assigns(:point)).to eq point
     end
   end
 end

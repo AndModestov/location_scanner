@@ -14,3 +14,24 @@ table.table
       td = link_to 'Delete point', point_path(@point), class: 'btn btn-primary',
                                                       method: 'delete', data: {confirm: "Sure?"}
                                                       
+br
+
+.panel.panel-info.create_form
+  .panel-heading
+    .panel-title Find nearest points: 
+  .panel-body.row  
+    = form_tag find_nearest_points_point_path, method: :get, remote: true do
+      = text_field_tag :radius, "", placeholder: 'Enter Radius'
+      = submit_tag 'Search', class: 'btn btn-primary table_clear', data: { point_id: @point.id }
+
+h3 Points in radius:
+table.table
+  thead
+    tr
+      th id
+      th latitude
+      th longitude
+      
+  tbody id = "nearest_points_#{@point.id}"
+      
+= subscribe_to "/nearest_points"

@@ -6,10 +6,20 @@ class Point < ActiveRecord::Base
   EARTH_R = 6371
   PI = 3.141592
 
+  def get_nearest_points radius
+    points = Point.where.not(id: self.id)
+
+    points.each do |point|
+      range = calculate_range point.id
+      next if range > radius
+      publish_point point
+    end
+  end
+
   def calculate_range target_point_id
     target_point = Point.find(target_point_id)
-    lat1 = to_radians(latitude)
-    lon1 = to_radians(longitude)
+    lat1 = to_radians(self.latitude)
+    lon1 = to_radians(self.longitude)
     lat2 = to_radians(target_point.latitude)
     lon2 = to_radians(target_point.longitude)
 
@@ -20,5 +30,11 @@ class Point < ActiveRecord::Base
 
   def to_radians deg
     deg*PI/180
+  end
+
+  private
+
+  def publish_point point
+    PrivatePub.publish_to "/nearest_points", point: point.to_json, base_point_id: self.id
   end
 end

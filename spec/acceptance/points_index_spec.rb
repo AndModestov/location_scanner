@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'Visitor can watch the points list' do
+feature 'Index points' do
   given!(:points){ create_list(:point, 3) }
 
-  scenario 'Visitor tryes to watch the points list' do
+  scenario 'Visitor watches the points list' do
     visit points_path
 
     points.each do |point|
